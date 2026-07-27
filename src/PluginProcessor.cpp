@@ -761,7 +761,8 @@ void TetraOPAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
     for (const auto metadata : midiMessages)
     {
         auto message = metadata.getMessage();
-        int newPos = metadata.samplePosition * osfactor;
+        int safePos = juce::jlimit(0, buffer.getNumSamples() - 1, metadata.samplePosition);
+        int newPos = safePos * osfactor;
         oversampledMidi.addEvent(message, newPos);
     }
 
