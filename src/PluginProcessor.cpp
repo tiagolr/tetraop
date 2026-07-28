@@ -776,7 +776,7 @@ void TetraOPAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce:
         int thisBlock = std::min(todo, MAX_BLOCKSIZE / osfactor);
 
         currBlockSize = thisBlock;
-        currBlockPos = pos;
+        currBlockPos = pos * osfactor;
 
         modulation->tick((double)osrate,
             thisBlock * osfactor,
